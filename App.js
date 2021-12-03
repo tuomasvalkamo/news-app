@@ -7,11 +7,26 @@ import { Ionicons } from '@expo/vector-icons'
 import Frontpage from './components/Frontpage'
 import LatestArticles from './components/LatestArticles';
 import WebBrowser from './components/WebBrowser';
+import Bookmarks from './components/Bookmarks';
+
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator();
 
 export default function App() {
+
+  const auth = getAuth();
+  signInAnonymously(auth)
+    .then(() => {
+      // Signed in..
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode)
+      console.log(errorMessage)
+    })
 
   return (
     <NavigationContainer>
@@ -24,6 +39,7 @@ export default function App() {
         <Stack.Screen name="Web browser" component={WebBrowser} initialParams={{ url: '' }} />
         <Stack.Screen name="Frontpage" component={Frontpage} />
         <Stack.Screen name="Latest news" component={LatestArticles} />
+        <Stack.Screen name="Bookmarks" component={Bookmarks} />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -42,6 +58,8 @@ function Home() {
         iconName = 'md-newspaper-outline';
       } else if (route.name === 'Web browser') {
         iconName = 'md-globe-outline';
+      } else if (route.name === 'Bookmarks') {
+        iconName = 'bookmarks-outline';
       }
 
       return <Ionicons name={iconName} size={size} color={color} />;
@@ -56,6 +74,7 @@ function Home() {
       >
         <Tab.Screen name="Frontpage" component={Frontpage} />
         <Tab.Screen name="Latest news" component={LatestArticles} />
+        <Tab.Screen name="Bookmarks" component={Bookmarks} />
         <Tab.Screen name="Web browser" component={WebBrowser} initialParams={{ url: '' }} />
       </Tab.Navigator>
     </SafeAreaView>

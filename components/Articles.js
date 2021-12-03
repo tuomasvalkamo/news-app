@@ -12,9 +12,10 @@ function Articles(props) {
             title={article.title}
             url={article.url}
             date={article.created_at}
+            bookmarks={props.bookmarks}
           />
         )
-      }) : <Text>{errorMessage}</Text>}
+      }) : <Text>No articles found.</Text>}
     </View>
   )
 }
