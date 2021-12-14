@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet, Button, Text } from 'react-native'
 import Articles from './Articles'
-import { firebaseConfig } from './firebaseConfig'
+import { loadBookmarks, clearStorage } from './AsyncStorage'
 
-import { initializeApp } from 'firebase/app'
-import { getDatabase, push, ref, onValue } from 'firebase/database'
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+import { useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state/index';
 
 function Bookmarks() {
-  const [bookmarks, setBookmarks] = useState()
+  // Redux state management
+  const bookmarks = useSelector(state => state.bookmarks)
+  const dispatch = useDispatch()
+  const { setBookmarksFromDB } = bindActionCreators(actionCreators, dispatch)
 
-  // Listen for DB updates
   useEffect(() => {
-    const bookmarksRef = ref(database, 'bookmarks/')
-    onValue(bookmarksRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setBookmarks(Object.values(data));
-      }
-    })
-  }, []);
+    setBookmarkData()
+  }, [])
 
-  //<Articles articles={bookmarks} bookmarks={bookmarks} />
+  const setBookmarkData = async () => {
+    // Load bookmarks from AsyncStorage
+    const values = await loadBookmarks()
+    // Set Redux state to equal AsyncStorage
+    setBookmarksFromDB(values)
+
+    console.log(values)
+  }
 
   return (
     <ScrollView style={styles.container}>
-      <Articles articles={bookmarks} bookmarks={bookmarks} />
+      <Button title="load" onPress={() => setBookmarkData()} />
+      <Button title="clear" onPress={() => clearStorage()} />
+      <Button title="log redux bookmarks" onPress={() => console.log('Redux state: ' + JSON.stringify(bookmarks))} />
+
+      {bookmarks.length != 0 ?
+        <Articles articles={bookmarks} articlesAreAlsoBookmarks={true} />
+        : <Text>You haven't bookmarked anything yet.</Text>
+      }
     </ScrollView>
   )
 }

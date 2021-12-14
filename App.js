@@ -1,52 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons'
+
 import Frontpage from './components/Frontpage'
 import LatestArticles from './components/LatestArticles';
 import WebBrowser from './components/WebBrowser';
 import Bookmarks from './components/Bookmarks';
 
-import { getAuth, signInAnonymously } from "firebase/auth";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons'
+
+import { Provider } from 'react-redux'
+import { store } from './state/store'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator();
 
 export default function App() {
-
-  const auth = getAuth();
-  signInAnonymously(auth)
-    .then(() => {
-      // Signed in..
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode)
-      console.log(errorMessage)
-    })
-
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="Web browser" component={WebBrowser} initialParams={{ url: '' }} />
-        <Stack.Screen name="Frontpage" component={Frontpage} />
-        <Stack.Screen name="Latest news" component={LatestArticles} />
-        <Stack.Screen name="Bookmarks" component={Bookmarks} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Web browser" component={WebBrowser} initialParams={{ url: '' }} />
+          <Stack.Screen name="Frontpage" component={Frontpage} />
+          <Stack.Screen name="Latest news" component={LatestArticles} />
+          <Stack.Screen name="Bookmarks" component={Bookmarks} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
 function Home() {
+
   // Navigation Icons
   const screenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {

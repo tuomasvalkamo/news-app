@@ -1,34 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { View, Pressable, StyleSheet, Button } from 'react-native'
+import { View, Pressable, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { firebaseConfig } from './firebaseConfig'
+import { saveBookmark, deleteBookmark } from './AsyncStorage';
 
-import { initializeApp } from 'firebase/app'
-import { getDatabase, push, ref, onValue } from 'firebase/database'
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+import { useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state/index';
 
 function ArticleActions(props) {
   const [bookmarked, setBookmarked] = useState(false)
-  const [title, setTitle] = useState(props.title)
-  const [date, setDate] = useState(props.date)
-  const [url, setUrl] = useState(props.url)
-  const [formattedUrl, setFormattedUrl] = useState(props.formattedUrl)
-  const [bookmarks, setBookmarks] = useState(props.bookmarks)
+  const [isDeleted, setIsDeleted] = useState(false)
+
+  // Redux state management
+  const bookmarks = useSelector(state => state.bookmarks)
+  const dispatch = useDispatch()
+  const { addBookmark, removeBookmark } = bindActionCreators(actionCreators, dispatch)
 
   useEffect(() => {
-    setBookmarks(props.bookmarks)
-  }, [props.bookmarks])
-
-  useEffect(() => {
-    checkIfBookmarked()
+    isDeleted ? '' : checkIfBookmarked()
   }, [bookmarks])
 
   const checkIfBookmarked = () => {
     if (bookmarks) {
       for (let i = 0; i < bookmarks.length; i++) {
-        if (bookmarks[i].url === url) {
+        if (bookmarks[i].url === props.url) {
           setBookmarked(true)
         }
       }
@@ -38,32 +33,34 @@ function ArticleActions(props) {
   const handleBookmarkPress = () => {
     if (!bookmarked) {
       setBookmarked(true)
-      saveBookmark()
+
+      // Save bookmark to AsyncStorage
+      saveBookmark(props.objectID, props.title, props.date, props.url, props.formattedUrl)
+
+      // Add bookmark to Redux state
+      const newBookmarkObject = {
+        objectID: props.objectID,
+        title: props.title,
+        date: props.date,
+        url: props.url,
+        formattedUrl: props.formattedUrl
+      }
+
+      addBookmark(newBookmarkObject)
     } else {
+      setIsDeleted(true)
       setBookmarked(false)
+      // Delete bookmark from AsyncStorage
+      deleteBookmark(props.objectID)
+      // Remove bookmark from Redux state
+      removeBookmark(props.objectID)
     }
-  }
-
-  const saveBookmark = () => {
-    push(ref(database, 'bookmarks/'), {
-      'title': title, 'created_at': date, 'url': url
-    })
-      .then(() => {
-        console.log('Data saved successfully!')
-      })
-      .catch((error) => {
-        console.log('The write failed... Error message: ' + error)
-      })
-  }
-
-  const deleteBookmark = () => {
-
   }
 
   return (
     <View style={styles.infoActions}>
       <Pressable
-        onPress={() => console.log(title + ',,,, ' + url + ',,,, ' + date + ',,,, ' + formattedUrl)}
+        onPress={() => console.log('asd')}
       >
         <Ionicons name='share-social-outline' size={24} style={styles.share} />
       </Pressable>

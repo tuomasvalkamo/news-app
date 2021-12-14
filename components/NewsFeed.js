@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native'
 import Articles from './Articles'
-import { firebaseConfig } from './firebaseConfig'
-
-import { initializeApp } from 'firebase/app'
-import { getDatabase, push, ref, onValue } from 'firebase/database'
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 
 const API_URL = 'https://hn.algolia.com/api/v1/'
 
@@ -15,17 +8,6 @@ function NewsFeed(props) {
   const [articles, setArticles] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const [bookmarks, setBookmarks] = useState()
-
-  // Listen for DB updates
-  useEffect(() => {
-    const bookmarksRef = ref(database, 'bookmarks/')
-    onValue(bookmarksRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setBookmarks(Object.values(data));
-      }
-    })
-  }, []);
 
   useEffect(() => {
     fetchArticles()
@@ -66,7 +48,7 @@ function NewsFeed(props) {
 
   return (
     <View>
-      <Articles articles={articles} bookmarks={bookmarks} />
+      <Articles articles={articles} articlesAreAlsoBookmarks={false} />
     </View>
   )
 }

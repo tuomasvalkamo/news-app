@@ -6,13 +6,13 @@ import ArticleActions from './ArticleActions';
 
 const Stack = createStackNavigator();
 
-function Article({ date, title, url, bookmarks }) {
+function Article({ date, title, url, objectID }) {
   const navigation = useNavigation();
 
   const parseDate = (d) => {
     const date = new Date(d)
     const day = date.getDate()
-    const month = date.getMonth()
+    const month = date.getMonth() + 1
     const year = date.getFullYear()
     const hour = date.getHours()
     const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
@@ -52,11 +52,11 @@ function Article({ date, title, url, bookmarks }) {
           <Text style={[styles.date, styles.lightText]}>{parseDate(date)}</Text>
         </View>
         <ArticleActions
+          objectID={objectID}
           title={title}
           url={url}
           date={date}
           formattedUrl={formatUrl(url)}
-          bookmarks={bookmarks}
         />
       </View>
     </Pressable>
