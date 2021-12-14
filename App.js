@@ -5,6 +5,7 @@ import Frontpage from './screens/Frontpage'
 import LatestArticles from './screens/LatestArticles';
 import WebBrowser from './screens/WebBrowser';
 import Bookmarks from './screens/Bookmarks';
+import { colors } from './colors';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -57,8 +58,6 @@ function Home() {
     const values = await loadBookmarks()
     // Set Redux state to equal AsyncStorage
     setBookmarksFromDB(values)
-
-    console.log('AsyncStorage content: ' + JSON.stringify(bookmarks))
   }
 
   // Navigation Icons
@@ -66,7 +65,7 @@ function Home() {
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
 
-      if (route.name === 'Frontpage') {
+      if (route.name === 'Top stories') {
         iconName = 'md-home-outline';
       } else if (route.name === 'Latest news') {
         iconName = 'md-newspaper-outline';
@@ -77,16 +76,31 @@ function Home() {
       }
 
       return <Ionicons name={iconName} size={size} color={color} />;
-    }
+    },
+    headerTitleAlign: 'center',
+    headerStyle: {
+      backgroundColor: colors.color1
+    },
+    headerTitleStyle: {
+      color: '#fff'
+    },
+    tabBarStyle: {
+      backgroundColor: '#fff',
+      borderTopWidth: 1,
+      borderTopColor: '#dbdbdb'
+    },
+    tabBarItemStyle: { paddingVertical: 3 },
+    tabBarActiveTintColor: colors.color1,
+    tabBarInactiveTintColor: '#999'
   });
 
   return (
     <SafeAreaView style={styles.container}>
       <Tab.Navigator
-        initialRouteName="Frontpage"
+        initialRouteName="Top stories"
         screenOptions={screenOptions}
       >
-        <Tab.Screen name="Frontpage" component={Frontpage} />
+        <Tab.Screen name="Top stories" component={Frontpage} />
         <Tab.Screen name="Latest news" component={LatestArticles} />
         <Tab.Screen name="Bookmarks" component={Bookmarks} />
         <Tab.Screen name="Web browser" component={WebBrowser} initialParams={{ url: '' }} />
@@ -98,6 +112,6 @@ function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dbdbdb'
+    backgroundColor: colors.color2
   }
 })

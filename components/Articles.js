@@ -6,17 +6,20 @@ function Articles(props) {
 
   return (
     <View>
-      {props.articles ? props.articles.map((article, index) => {
-        return (
-          <Article
-            key={index}
-            objectID={article.objectID}
-            title={article.title}
-            url={article.url}
-            date={article.created_at}
-          />
-        )
-      }) : <Text>No articles found.</Text>}
+      {
+        props.articles ? props.articles.map((article, index) => {
+          return (
+            <Article
+              key={index}
+              objectID={article.objectID}
+              title={article.title}
+              url={article.url}
+              date={article.created_at || article.date}
+            />
+          )
+        })
+          : <Text>No articles found.</Text>
+      }
     </View>
   )
 }

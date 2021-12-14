@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Alert } from 'react-native'
+import { StyleSheet, ScrollView, Alert, StatusBar } from 'react-native'
 import NewsFeed from '../components/NewsFeed';
 import SearchContainer from '../components/SearchContainer';
+import { colors } from '../colors'
 
 const API_SEARCH = 'search_by_date?query='
 const API_URL_SEARCH = '&restrictSearchableAttributes=url'
@@ -58,6 +59,7 @@ function Frontpage() {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.color1} />
       <SearchContainer
         onSearchTermChange={handleSearchTermChange}
         onRadioValueChange={handleRadioButtonChange}

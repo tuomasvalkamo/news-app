@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, Button, Pressable, Alert } from 'react-native'
 import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
+import { colors } from '../colors'
 
 function SearchContainer(props) {
 
@@ -39,7 +40,7 @@ function SearchContainer(props) {
             value="Title"
             status={props.radioValue === 'Title' ? 'checked' : 'unchecked'}
             onPress={() => handleRadioChange('Title')}
-            color="red"
+            color={colors.color1}
           />
           <Text>Title</Text>
         </View>
@@ -48,7 +49,7 @@ function SearchContainer(props) {
             value="URL"
             status={props.radioValue === 'URL' ? 'checked' : 'unchecked'}
             onPress={() => handleRadioChange('URL')}
-            color="red"
+            color={colors.color1}
           />
           <Text>Website</Text>
         </View>
@@ -57,9 +58,11 @@ function SearchContainer(props) {
       <Button
         title="Search"
         onPress={() => handleButtonPress()}
+        color={colors.color3}
       />
       <Pressable
         onPress={() => handleResetPress()}
+        color={colors.color3}
       >
         <Text style={styles.resetText}>Reset search</Text>
       </Pressable>

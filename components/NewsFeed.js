@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import Articles from './Articles'
 
 const API_URL = 'https://hn.algolia.com/api/v1/'
-const HITS_PER_PAGE = '&hitsPerPage=50'
+const HITS_PER_PAGE = '&hitsPerPage=30'
 
 function NewsFeed(props) {
   const [articles, setArticles] = useState([])
@@ -35,11 +35,11 @@ function NewsFeed(props) {
   const filterArticles = (data) => {
     let newArticles = []
 
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].url) {
-        newArticles = [...newArticles, data[i]]
+    data.forEach(article => {
+      if (article.url) {
+        newArticles = [...newArticles, article]
       }
-    }
+    })
 
     setArticles(newArticles)
   }
