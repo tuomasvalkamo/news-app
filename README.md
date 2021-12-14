@@ -35,6 +35,6 @@ The application consists of four different views. Below I have showcased three o
 
 * After deleting bookmark in the bookmark tab the other tabs still show the article as bookmarked. Component not re-rendering after state change.
 
-## Licence
+## License
 
-
+[MIT License](https://github.com/tuomasvalkamo/news-app/blob/main/LICENSE)
