@@ -17,9 +17,9 @@ The application consists of four different views. Below I have showcased three o
 3. **Web browser tab:** Any article you click will be opened here. You can hop between different tabs and your article won't go anywhere.
 
 <p align="center">
-<a href="https://imgbb.com/"><img src="https://ibb.co/z55CjN0" alt="top stories screen" border="0" width="30%" />&nbsp;</a>
-<a href="https://imgbb.com/"><img src="https://ibb.co/crx7460" alt="bookmarks screen" border="0" width="30%" />&nbsp;</a>
-<a href="https://imgbb.com/"><img src="https://ibb.co/P65YJpv" alt="browser screen" border="0" width="30%" /></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/SxxHWJ9/Screenshot-20211214-211816-Expo-Go.jpg" alt="top stories screen" border="0" width="30%" />&nbsp;</a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/DRLS09h/Screenshot-20211214-211904-Expo-Go.jpg" alt="bookmarks screen" border="0" width="30%" />&nbsp;</a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/71GzBcd/Screenshot-20211214-211924-Expo-Go.jpg" alt="browser screen" border="0" width="30%" /></a>
 </p>
 
 ## Technologies & libraries
