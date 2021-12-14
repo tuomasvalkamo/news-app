@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import React from 'react'
+import { View, Text, StyleSheet, Button, Pressable, Alert } from 'react-native'
 import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 
@@ -16,6 +15,10 @@ function SearchContainer(props) {
 
   const handleButtonPress = () => {
     props.onButtonPress()
+  }
+
+  const handleResetPress = () => {
+    props.onResetPress()
   }
 
   return (
@@ -54,8 +57,12 @@ function SearchContainer(props) {
       <Button
         title="Search"
         onPress={() => handleButtonPress()}
-        style={styles.button}
       />
+      <Pressable
+        onPress={() => handleResetPress()}
+      >
+        <Text style={styles.resetText}>Reset search</Text>
+      </Pressable>
     </View>
   )
 }
@@ -73,14 +80,12 @@ const styles = StyleSheet.create({
     borderColor: '#dbdbdb',
     paddingRight: 12
   },
-  searchBox: {
-
-  },
   searchInput: {
     fontSize: 16
   },
   radioButtonGroup: {
     marginTop: 10,
+    marginBottom: 10,
     flexDirection: 'row'
   },
   radioButtonContainer: {
@@ -88,8 +93,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 5
   },
-  button: {
-
+  resetText: {
+    textAlign: 'center',
+    paddingTop: 15
   }
 })
 

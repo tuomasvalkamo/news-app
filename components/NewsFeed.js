@@ -3,11 +3,10 @@ import { View } from 'react-native'
 import Articles from './Articles'
 
 const API_URL = 'https://hn.algolia.com/api/v1/'
+const HITS_PER_PAGE = '&hitsPerPage=50'
 
 function NewsFeed(props) {
   const [articles, setArticles] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
-  const [bookmarks, setBookmarks] = useState()
 
   useEffect(() => {
     fetchArticles()
@@ -16,7 +15,7 @@ function NewsFeed(props) {
   async function fetchArticles() {
     try {
       console.log('Fetching articles... url: ' + props.urlAppendix)
-      const response = await fetch(`${API_URL}${props.urlAppendix}`)
+      const response = await fetch(`${API_URL}${props.urlAppendix}${HITS_PER_PAGE}`)
       const results = await response.json()
       console.log('Fetch complete!')
 
@@ -27,7 +26,6 @@ function NewsFeed(props) {
         filterArticles(results.hits)
       } else {
         console.log('Failed to fetch articles! Response not OK.')
-        setErrorMessage('Failed to fetch articles! Response not OK.')
       }
     } catch (error) {
       console.log(error)

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { WebView } from 'react-native-webview';
 
-function WebBrowser({ route, navigation }) {
+function WebBrowser({ route }) {
 
   return (
     <View style={styles.container}>

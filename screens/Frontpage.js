@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import NewsFeed from './NewsFeed';
-import SearchContainer from './SearchContainer';
+import { StyleSheet, ScrollView, Alert } from 'react-native'
+import NewsFeed from '../components/NewsFeed';
+import SearchContainer from '../components/SearchContainer';
 
 const API_SEARCH = 'search_by_date?query='
 const API_URL_SEARCH = '&restrictSearchableAttributes=url'
+const API_FRONTPAGE = 'search?tags=front_page'
 
 function Frontpage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [radioValue, setRadioValue] = useState('Title')
-  const [apiUrl, setApiUrl] = useState('search?tags=front_page')
+  const [apiUrl, setApiUrl] = useState(API_FRONTPAGE)
 
   const handleSearchTermChange = (value) => {
     setSearchTerm(value)
@@ -34,7 +35,25 @@ function Frontpage() {
       setApiUrl(query)
     } else {
       console.log('Empty search term! Can not make search.')
+      createAlert()
     }
+  }
+
+  const handleFeedReset = () => {
+    setApiUrl(API_FRONTPAGE)
+  }
+
+  const createAlert = () => {
+    Alert.alert(
+      "Empty search term.",
+      "Please enter text to search box.",
+      [
+        { text: "OK" }
+      ],
+      {
+        cancelable: true // Android users can click outside of box to dismiss
+      }
+    )
   }
 
   return (
@@ -43,6 +62,7 @@ function Frontpage() {
         onSearchTermChange={handleSearchTermChange}
         onRadioValueChange={handleRadioButtonChange}
         onButtonPress={handleButtonPress}
+        onResetPress={handleFeedReset}
         searchValue={searchTerm}
         radioValue={radioValue}
       />

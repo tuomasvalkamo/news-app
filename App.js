@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native'
 
-import Frontpage from './components/Frontpage'
-import LatestArticles from './components/LatestArticles';
-import WebBrowser from './components/WebBrowser';
-import Bookmarks from './components/Bookmarks';
+import Frontpage from './screens/Frontpage'
+import LatestArticles from './screens/LatestArticles';
+import WebBrowser from './screens/WebBrowser';
+import Bookmarks from './screens/Bookmarks';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons'
 
-import { Provider } from 'react-redux'
+import { loadBookmarks } from './database/AsyncStorage'
+
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import { store } from './state/store'
+import { actionCreators } from './state/index';
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator();
@@ -39,6 +43,23 @@ export default function App() {
 }
 
 function Home() {
+  // Redux state management
+  const bookmarks = useSelector(state => state.bookmarks)
+  const dispatch = useDispatch()
+  const { setBookmarksFromDB } = bindActionCreators(actionCreators, dispatch)
+
+  useEffect(() => {
+    setBookmarkData()
+  }, [])
+
+  const setBookmarkData = async () => {
+    // Load bookmarks from AsyncStorage
+    const values = await loadBookmarks()
+    // Set Redux state to equal AsyncStorage
+    setBookmarksFromDB(values)
+
+    console.log('AsyncStorage content: ' + JSON.stringify(bookmarks))
+  }
 
   // Navigation Icons
   const screenOptions = ({ route }) => ({

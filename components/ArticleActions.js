@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Pressable, StyleSheet } from 'react-native'
+import { View, Pressable, StyleSheet, Share } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { saveBookmark, deleteBookmark } from './AsyncStorage';
+import { saveBookmark, deleteBookmark } from '../database/AsyncStorage';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -9,7 +9,6 @@ import { actionCreators } from '../state/index';
 
 function ArticleActions(props) {
   const [bookmarked, setBookmarked] = useState(false)
-  const [isDeleted, setIsDeleted] = useState(false)
 
   // Redux state management
   const bookmarks = useSelector(state => state.bookmarks)
@@ -17,16 +16,16 @@ function ArticleActions(props) {
   const { addBookmark, removeBookmark } = bindActionCreators(actionCreators, dispatch)
 
   useEffect(() => {
-    isDeleted ? '' : checkIfBookmarked()
+    checkIfBookmarked()
   }, [bookmarks])
 
   const checkIfBookmarked = () => {
     if (bookmarks) {
-      for (let i = 0; i < bookmarks.length; i++) {
-        if (bookmarks[i].url === props.url) {
+      bookmarks.forEach(bookmark => {
+        if (bookmark.url === props.url) {
           setBookmarked(true)
         }
-      }
+      })
     }
   }
 
@@ -34,10 +33,6 @@ function ArticleActions(props) {
     if (!bookmarked) {
       setBookmarked(true)
 
-      // Save bookmark to AsyncStorage
-      saveBookmark(props.objectID, props.title, props.date, props.url, props.formattedUrl)
-
-      // Add bookmark to Redux state
       const newBookmarkObject = {
         objectID: props.objectID,
         title: props.title,
@@ -46,9 +41,11 @@ function ArticleActions(props) {
         formattedUrl: props.formattedUrl
       }
 
+      // Save bookmark to AsyncStorage
+      saveBookmark(props.objectID, props.title, props.date, props.url, props.formattedUrl)
+      // Add bookmark to Redux state
       addBookmark(newBookmarkObject)
     } else {
-      setIsDeleted(true)
       setBookmarked(false)
       // Delete bookmark from AsyncStorage
       deleteBookmark(props.objectID)
@@ -57,10 +54,31 @@ function ArticleActions(props) {
     }
   }
 
+  const shareArticle = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          props.url,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error)
+    }
+  };
+
   return (
     <View style={styles.infoActions}>
       <Pressable
-        onPress={() => console.log('asd')}
+        onPress={() => shareArticle()}
       >
         <Ionicons name='share-social-outline' size={24} style={styles.share} />
       </Pressable>

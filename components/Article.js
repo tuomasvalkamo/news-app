@@ -1,10 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import ArticleActions from './ArticleActions';
-
-const Stack = createStackNavigator();
 
 function Article({ date, title, url, objectID }) {
   const navigation = useNavigation();
