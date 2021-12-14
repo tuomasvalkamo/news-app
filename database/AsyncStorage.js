@@ -43,13 +43,3 @@ export const deleteBookmark = async (objectID) => {
     console.log(e)
   }
 }
-
-export const clearStorage = async () => {
-  try {
-    await AsyncStorage.clear()
-  } catch (e) {
-    console.log(e)
-  }
-
-  console.log('Async storage cleared.')
-}

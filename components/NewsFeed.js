@@ -14,18 +14,13 @@ function NewsFeed(props) {
 
   async function fetchArticles() {
     try {
-      console.log('Fetching articles... url: ' + props.urlAppendix)
       const response = await fetch(`${API_URL}${props.urlAppendix}${HITS_PER_PAGE}`)
       const results = await response.json()
-      console.log('Fetch complete!')
 
       if (response.ok) {
-        console.log('Fetched articles successfully')
-        // Filter out articles without a URL (Hacker news posts) 
-        // and save the rest to state
-        filterArticles(results.hits)
-      } else {
-        console.log('Failed to fetch articles! Response not OK.')
+        // Filter out articles without a URL (= Hacker news' own posts)
+        const filteredArticles = filterArticles(results.hits)
+        setArticles(filteredArticles)
       }
     } catch (error) {
       console.log(error)
@@ -41,7 +36,7 @@ function NewsFeed(props) {
       }
     })
 
-    setArticles(newArticles)
+    return newArticles
   }
 
   return (

@@ -22,8 +22,6 @@ function Frontpage() {
   }
 
   const handleButtonPress = () => {
-    console.log('Search button pressed.')
-
     // Check if user has typed search term
     if (searchTerm) {
       // Create url appendix for search
@@ -35,7 +33,6 @@ function Frontpage() {
 
       setApiUrl(query)
     } else {
-      console.log('Empty search term! Can not make search.')
       createAlert()
     }
   }
@@ -52,7 +49,7 @@ function Frontpage() {
         { text: "OK" }
       ],
       {
-        cancelable: true // Android users can click outside of box to dismiss
+        cancelable: true // Android users can click outside of the box to dismiss
       }
     )
   }
