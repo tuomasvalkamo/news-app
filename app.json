@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "React Native app for reading news from Hacker News API ",
+    "githubUrl": "https://github.com/tuomasvalkamo/news-app"
   }
 }
