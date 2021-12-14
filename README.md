@@ -13,7 +13,7 @@
 The application consists of four different views. Below I have showcased three of them. (Captured on Android, from left to right):
 
 1. **Top stories tab:** Todays most upvoted stories from Hacker News. You can also search stories by title keyword or by site url.
-2. **Bookmarks:** Your saved bookmarks. You can bookmark any article you find to add it here.
+2. **Bookmarks tab:** Your saved bookmarks. You can bookmark any article you find to add it here.
 3. **Web browser tab:** Any article you click will be opened here. You can hop between different tabs and your article won't go anywhere.
 
 <p align="center">
@@ -23,3 +23,18 @@ The application consists of four different views. Below I have showcased three o
 </p>
 
 ## Technologies & libraries
+
+* [React Native](https://reactnative.dev/), JavaScript framework for mobile app development
+* [Expo](https://expo.dev/), framework & platform for universal React apps
+* [HN Search powered by Algolia](https://hn.algolia.com/api), API for searching [HackerNews](https://news.ycombinator.com/) community site
+* React state management: [Redux](https://redux.js.org/) and [React Redux](https://react-redux.js.org/)
+* User interface navigation: [React Navigation](https://reactnavigation.org/)
+* Some UI components: [React Native Paper](https://callstack.github.io/react-native-paper/)
+
+## Known bugs
+
+* After deleting bookmark in the bookmark tab the other tabs still show the article as bookmarked. Component not re-rendering after state change.
+
+## Licence
+
+
