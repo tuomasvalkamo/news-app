@@ -1,4 +1,4 @@
-<h1 align="center">Hacker News Reader<p align="center"> <a href="https://github.com/tuomasvalkamo/news-app/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="github" width="40" height="40"/> </a> <a href="https://news.ycombinator.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/ycombinator/ycombinator-tile.svg" alt="heroku" width="40" height="40"/> </a><a href="https://github.com/Poiju/ravintolaruletti-mobile" target="_blank" rel="noreferrer"> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </a> </p> </h1>
+<h1 align="center">Hacker News Reader<p align="center"> <a href="https://github.com/tuomasvalkamo/news-app/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="github" width="40" height="40"/> </a> <a href="https://news.ycombinator.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/ycombinator/ycombinator-tile.svg" alt="heroku" width="40" height="40"/> </a> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </p> </h1>
 
 <h2>Available <a href="https://expo.dev/@tuomasvalkamo/news-app" target="_blank" rel="noreferrer">here.</a> No download needed!</h2>
 
@@ -17,9 +17,9 @@ The application consists of four different views. Below I have showcased three o
 3. **Web browser tab:** Any article you click will be opened here. You can hop between different tabs and your article won't go anywhere.
 
 <p align="center">
-<img src="https://ibb.co/z55CjN0" alt="top stories screen" border="0" width="30%" />&nbsp;
-<img src="https://ibb.co/crx7460" alt="bookmarks screen" border="0" width="30%" />&nbsp;
-<img src="https://ibb.co/P65YJpv" alt="browser screen" border="0" width="30%" /></a>
+<a href="https://imgbb.com/"><img src="https://ibb.co/z55CjN0" alt="top stories screen" border="0" width="30%" />&nbsp;</a>
+<a href="https://imgbb.com/"><img src="https://ibb.co/crx7460" alt="bookmarks screen" border="0" width="30%" />&nbsp;</a>
+<a href="https://imgbb.com/"><img src="https://ibb.co/P65YJpv" alt="browser screen" border="0" width="30%" /></a>
 </p>
 
 ## Technologies & libraries
