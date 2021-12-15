@@ -28,6 +28,7 @@ The application consists of four different views. Below I have showcased three o
 * [Expo](https://expo.dev/), framework & platform for universal React apps
 * [HN Search powered by Algolia](https://hn.algolia.com/api), API for searching [HackerNews](https://news.ycombinator.com/) community site
 * React state management: [Redux](https://redux.js.org/) and [React Redux](https://react-redux.js.org/)
+* Using web browser in-app: [React Native WebView](https://www.npmjs.com/package/react-native-webview)
 * User interface navigation: [React Navigation](https://reactnavigation.org/)
 * Some UI components: [React Native Paper](https://callstack.github.io/react-native-paper/)
 
