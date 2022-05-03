@@ -79,11 +79,13 @@ function ArticleActions(props) {
     <View style={styles.infoActions}>
       <Pressable
         onPress={() => shareArticle()}
+        testID="sharePressable"
       >
         <Ionicons name='share-social-outline' size={24} style={styles.share} />
       </Pressable>
       <Pressable
         onPress={() => handleBookmarkPress()}
+        testID="bookmarkPressable"
       >
         <Ionicons name={bookmarked === true ? 'bookmark' : 'bookmark-outline'} size={24} />
       </Pressable>
