@@ -1,7 +1,5 @@
 <h1 align="center">Hacker News Reader<p align="center"> <a href="https://github.com/tuomasvalkamo/news-app/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="github" width="40" height="40"/> </a> <a href="https://news.ycombinator.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/ycombinator/ycombinator-tile.svg" alt="heroku" width="40" height="40"/> </a> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </p> </h1>
 
-<h2>Available <a href="https://expo.dev/@tuomasvalkamo/news-app" target="_blank" rel="noreferrer">here.</a> No download needed!</h2>
-
 ## Project description
 
 * Mobile application for reading Hacker News by Y Combinator
